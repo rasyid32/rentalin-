@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rent Cars with Rentalin!</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <style>
+      .transition-colors {
+        transition-property: color, background-color, border-color,
+          text-decoration-color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+      }
+      .wave-shape {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+      }
+      .wave-shape svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 70px;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              orange: {
+                500: "#f97316",
+                600: "#ea580c",
+              },
+              red: {
+                500: "#ef4444",
+                600: "#dc2626",
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 px-4 py-3">
+      <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+          <div
+            class="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+            <i class="fas fa-car text-white text-sm"></i>
+          </div>
+          <span class="text-xl font-bold text-gray-900">
+            Rentalin<span class="text-orange-500">!</span>
+          </span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <div class="relative group">
+            <a
+              href="index.html"
+              class="text-gray-700 hover:text-orange-500 flex items-center">
+              Home
+            </a>
+          </div>
+          <div class="relative">
+            <button
+              id="dropdownButton"
+              class="text-gray-700 hover:text-orange-500 flex items-center focus:outline-none">
+              Kendaraan
+              <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            </button>
+            <div
+              id="dropdownMenu"
+              class="absolute top-full left-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-md hidden z-50">
+              <a
+                href="#"
+                class="block px-4 py-2 text-gray-700 hover:bg-orange-100"
+                >Mobil</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-gray-700 hover:bg-orange-100"
+                >Motor</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-gray-700 hover:bg-orange-100"
+                >Truk</a
+              >
+            </div>
+          </div>
+          <div class="relative group">
+            <a
+              href="#"
+              class="text-gray-700 hover:text-orange-500 flex items-center">
+              Pages
+            </a>
+          </div>
+        </nav>
+
+        <!-- Right side -->
+        <div class="flex items-center space-x-4">
+          <div
+            class="hidden md:flex items-center space-x-2 text-sm text-gray-600">
+            <i class="fas fa-map-marker-alt text-orange-500"></i>
+            <span>Rent in 5 Locations</span>
+          </div>
+          <a
+            href="login.html"
+            class="text-gray-700 hover:text-orange-500 text-sm"
+            >Sign In</a
+          >
+          <a
+            href="#"
+            class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+            List A Vehicle
+          </a>
+          <div class="text-gray-600 text-sm">Eng</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-2">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center text-sm">
+          <a href="index.html" class="text-gray-500 hover:text-blue-500"
+            >Home</a
+          >
+          <span class="mx-2 text-gray-400">/</span>
+          <span class="text-orange-500">mobil</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gray-800 py-20 px-4 text-center text-white relative">
+      <div class="container mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">
+          Rent Cars<br />
+          with Rentalin!
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-200">
+          Buy or Rent cars at lowest prices directly from<br />
+          owners and dealers near you.
+        </p>
+        <div class="max-w-2xl mx-auto">
+          <div
+            class="flex items-center justify-center bg-white rounded-full shadow-md overflow-hidden">
+            <i class="fas fa-search text-gray-500 ml-4"></i>
+            <input
+              type="text"
+              placeholder="cari mobil..."
+              class="w-full py-4 px-4 text-gray-700 focus:outline-none" />
+            <button
+              class="bg-blue-500 text-white py-4 px-6 font-medium hover:bg-blue-600 transition-colors">
+              CARI
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suggested Items Section -->
+    <section class="py-16 px-4 bg-gray-100">
+      <div class="container mx-auto">
+        <div class="flex items-center mb-8">
+          <i class="fas fa-car text-blue-500 text-xl mr-3"></i>
+          <h2 class="text-2xl font-bold text-gray-900">Mobil</h2>
+        </div>
+        <p class="text-gray-600 mb-12 max-w-2xl">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem
+          dolore iure ad voluptatibus, velit aliquid facilis dolorum enim quasi
+          totam!
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="singleItem.html"><div
+                class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250"
+                  alt="Tesla Model 3"
+                  class="w-full h-48 object-cover" />
+                <div class="p-4">
+                  <h4 class="font-semibold text-gray-900 mb-2">Tesla Model 3</h4>
+                  <p class="text-gray-600 text-sm mb-3">
+                    A powerful electric sedan, great for both daily use and long
+                    trips.
+                  </p>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-blue-500 font-bold">Rent For: $95/Day</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+          <!-- Tesla Model 3 -->
+          <a href="singleItem.html"><div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <img
+              src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250"
+              alt="Tesla Model 3"
+              class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h4 class="font-semibold text-gray-900 mb-2">Tesla Model 3</h4>
+              <p class="text-gray-600 text-sm mb-3">
+                A powerful electric sedan, great for both daily use and long
+                trips.
+              </p>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-blue-500 font-bold">Rent For: $95/Day</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="singleItem.html"><div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <img
+              src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250"
+              alt="Tesla Model 3"
+              class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h4 class="font-semibold text-gray-900 mb-2">Tesla Model 3</h4>
+              <p class="text-gray-600 text-sm mb-3">
+                A powerful electric sedan, great for both daily use and long
+                trips.
+              </p>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-blue-500 font-bold">Rent For: $95/Day</span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a href="singleItem.html"><div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <img
+              src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250"
+              alt="Tesla Model 3"
+              class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h4 class="font-semibold text-gray-900 mb-2">Tesla Model 3</h4>
+              <p class="text-gray-600 text-sm mb-3">
+                A powerful electric sedan, great for both daily use and long
+                trips.
+              </p>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-blue-500 font-bold">Rent For: $95/Day</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="singleItem.html"><div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <img
+              src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250"
+              alt="Tesla Model 3"
+              class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h4 class="font-semibold text-gray-900 mb-2">Tesla Model 3</h4>
+              <p class="text-gray-600 text-sm mb-3">
+                A powerful electric sedan, great for both daily use and long
+                trips.
+              </p>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-blue-500 font-bold">Rent For: $95/Day</span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a href="singleItem.html"><div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <img
+              src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250"
+              alt="Tesla Model 3"
+              class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h4 class="font-semibold text-gray-900 mb-2">Tesla Model 3</h4>
+              <p class="text-gray-600 text-sm mb-3">
+                A powerful electric sedan, great for both daily use and long
+                trips.
+              </p>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-blue-500 font-bold">Rent For: $95/Day</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+   
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-40 py-12 px-4">
+      <div class="container mx-auto">
+        <div class="text-center">
+          <p>&copy; 2024 Rentalin!. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+
+    <script>
+        const dropdownButton = document.getElementById("dropdownButton");
+      const dropdownMenu = document.getElementById("dropdownMenu");
+
+      dropdownButton.addEventListener("click", function (e) {
+        e.stopPropagation(); // prevent event bubbling
+        dropdownMenu.classList.toggle("hidden");
+      });
+
+      // Optional: click outside to close
+      document.addEventListener("click", function (e) {
+        if (
+          !dropdownMenu.contains(e.target) &&
+          !dropdownButton.contains(e.target)
+        ) {
+          dropdownMenu.classList.add("hidden");
+        }
+      });
+    </script>
+  </body>
+</html>

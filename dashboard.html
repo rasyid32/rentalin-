@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+      .sidebar-transition {
+        transition: transform 0.3s ease-in-out;
+      }
+      .modal-backdrop {
+        backdrop-filter: blur(4px);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Mobile menu overlay -->
+    <div
+      id="mobile-overlay"
+      class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 sidebar-transition">
+      <div
+        class="flex items-center justify-between h-16 px-6 border-b border-gray-200">
+        <h1 class="text-xl font-bold text-gray-800">Admin Panel</h1>
+        <button id="close-sidebar" class="lg:hidden">
+          <i data-lucide="x" class="w-6 h-6 text-gray-600"></i>
+        </button>
+      </div>
+
+      <nav class="mt-6">
+        <div class="px-6 space-y-2">
+          <a
+            href="#"
+            class="flex items-center px-4 py-3 text-gray-700 bg-blue-50 border-r-4 border-blue-500 rounded-l-lg">
+            <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3"></i>
+            Pelanggan
+          </a>
+
+          <a
+            href="#"
+            class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg">
+            <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i>
+            Kendaraan
+          </a>
+          <a
+            href="#"
+            class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg">
+            <i data-lucide="bar-chart-3" class="w-5 h-5 mr-3"></i>
+            Penyewaan
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Main content -->
+    <div class="lg:ml-64">
+      <!-- Header -->
+      <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="flex items-center justify-between h-16 px-6">
+          <div class="flex items-center">
+            <button id="menu-toggle" class="lg:hidden mr-4">
+              <i data-lucide="menu" class="w-6 h-6 text-gray-600"></i>
+            </button>
+            <h2 class="text-xl font-semibold text-gray-800">Dashboard</h2>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button
+              class="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+              <i data-lucide="log-out" class="w-5 h-5"></i>
+              <span class="text-sm font-medium text-gray-700">Logout</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard content -->
+      <main class="p-6">
+        <!-- Stats cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-gray-600">Total Pelanggan</p>
+                <p id="total-users" class="text-2xl font-bold text-gray-900">
+                  0
+                </p>
+              </div>
+              <div class="p-3 bg-blue-100 rounded-full">
+                <i data-lucide="users" class="w-6 h-6 text-blue-600"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-gray-600">Kendaraan</p>
+                <p id="active-users" class="text-2xl font-bold text-gray-900">
+                  0
+                </p>
+              </div>
+              <div class="p-3 bg-green-100 rounded-full">
+                <i data-lucide="user-check" class="w-6 h-6 text-green-600"></i>
+              </div>
+            </div>
+          </div> -->
+        </div>
+
+        <!-- Users table -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div class="p-6 border-b border-gray-200">
+            <div
+              class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4 sm:mb-0">
+                Pelanggan
+              </h3>
+              <div
+                class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Cari pelanggan..."
+                    class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                  <i
+                    data-lucide="search"
+                    class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                </div>
+                <button
+                  id="add-user-btn"
+                  class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center">
+                  <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                  + Tambah Pelanggan
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Pelanggan
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Email
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    nomer SIM
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    nomor hp
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                id="users-table-body"
+                class="bg-white divide-y divide-gray-200">
+                <!-- Users will be populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Add/Edit User Modal -->
+    <div
+      id="user-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden z-50">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+          <div class="p-6 border-b border-gray-200">
+            <h3 id="modal-title" class="text-lg font-semibold text-gray-900">
+              Add New User
+            </h3>
+          </div>
+
+          <form id="user-form" class="p-6 space-y-4">
+            <input type="hidden" id="user-id" />
+
+            <div>
+              <label
+                for="user-name"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="user-name"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            </div>
+
+            <div>
+              <label
+                for="user-email"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="user-email"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            </div>
+
+            <div>
+              <label
+                for="user-role"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Role</label
+              >
+              <select
+                id="user-role"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <option value="">Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+                <option value="Manager">Manager</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="user-status"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Status</label
+              >
+              <select
+                id="user-status"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <option value="">Select Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+          </form>
+
+          <div class="p-6 border-t border-gray-200 flex justify-end space-x-3">
+            <button
+              id="cancel-btn"
+              type="button"
+              class="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+              Cancel
+            </button>
+            <button
+              id="save-btn"
+              type="submit"
+              form="user-form"
+              class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              Save User
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div
+      id="delete-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden z-50">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <div class="p-3 bg-red-100 rounded-full mr-4">
+                <i data-lucide="trash-2" class="w-6 h-6 text-red-600"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900">Delete User</h3>
+                <p class="text-sm text-gray-600">
+                  Are you sure you want to delete this user? This action cannot
+                  be undone.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 border-t border-gray-200 flex justify-end space-x-3">
+            <button
+              id="cancel-delete-btn"
+              type="button"
+              class="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+              Cancel
+            </button>
+            <button
+              id="confirm-delete-btn"
+              type="button"
+              class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
